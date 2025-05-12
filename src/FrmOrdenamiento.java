@@ -124,7 +124,11 @@ public class FrmOrdenamiento extends JFrame {
     }
 
     private void btnBuscar(ActionEvent evt) {
+        // Busqueda binaria
 
+        // Cortar la lista a la mitad y si el dato esta en la mitad finaliza, 
+        // pero si no, busca si es menor y mayor, y dependiendo de esto
+        // corta otra vez la lista a la mitad del lado en el que se encuentre el dato
     }
 
 }
