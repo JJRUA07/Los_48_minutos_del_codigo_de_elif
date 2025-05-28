@@ -129,11 +129,28 @@ public class FrmOrdenamiento extends JFrame {
     }
 
     private void btnBuscar(ActionEvent evt) {
-        // Busqueda binaria
-
-        // Cortar la lista a la mitad y si el dato esta en la mitad finaliza, 
-        // pero si no, busca si es menor y mayor, y dependiendo de esto
-        // corta otra vez la lista a la mitad del lado en el que se encuentre el dato
+        String texto = txtBuscar.getText().trim();
+        int indice = ServicioDocumento.buscarCoincidencia(texto);
+        if (indice != -1) {
+            tblDocumentos.setRowSelectionInterval(indice, indice);
+            tblDocumentos.scrollRectToVisible(tblDocumentos.getCellRect(indice, 0, true));
+        } else {
+            JOptionPane.showMessageDialog(this, "No se encontraron coincidencias con: " + texto,
+                    "Búsqueda sin resultados", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
+    private void moverA(int desplazamiento) {
+        int nuevoIndice;
+        if (desplazamiento == 1) { // Siguiente coincidencia
+            nuevoIndice = ServicioDocumento.getSiguienteCoincidencia();
+        } else { // Anterior coincidencia
+            nuevoIndice = ServicioDocumento.getAnteriorCoincidencia();
+        }
+
+        if (nuevoIndice != -1) {
+            tblDocumentos.setRowSelectionInterval(nuevoIndice, nuevoIndice);
+            tblDocumentos.scrollRectToVisible(tblDocumentos.getCellRect(nuevoIndice, 0, true));
+        }
+    }
 }
